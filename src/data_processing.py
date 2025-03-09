@@ -7,12 +7,50 @@ from src.data_extraction import load_data, to_sentiment, create_sentiment_column
 # Load a BERT tokenizer
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
-def preprocess_reviews(df: pd.DataFrame, max_length=128):
+def load_data_processing(path_to_data: str) -> pd.DataFrame:
+    """
+    Load data from the CSV file of Google reviews.
+
+    Parameters:
+        - path_to_data (str): Path to the CSV file of Google reviews.
+
+    Returns:
+        - DataFrame: Loaded data
+    """
+    return load_data()
+
+
+def to_sentiment_processing(rating) -> int:
+    """
+    Convert rating to sentiment.
+
+    Parameters:
+        - rating (int or float): Rating of the review.
+
+    Returns:
+        - sentiment_score (int): Sentiment score of the review.
+    """
+    return to_sentiment(rating)
+
+
+def create_sentiment_column_processing(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Create a new column in the DataFrame with sentiment scores.
+
+    Parameters: 
+        - df (pd.DataFrame): DataFrame with reviews.
+
+    Returns:
+        - pd.DataFrame: Updated DataFrame
+    """
+    return create_sentiment_column()
+
+def preprocess_reviews_processing(df: pd.DataFrame, max_length=128):
     """
     Tokenizes and processes reviews for BERT input.
     """
     encoding = tokenizer(
-        df["review"].tolist(),
+        df["content"].tolist(),
         padding="max_length",
         truncation=True,
         max_length=max_length,
@@ -43,7 +81,7 @@ def prepare_dataloader(path_to_data: str, batch_size=16):
     """
     df = load_data(path_to_data)
     df = create_sentiment_column(df)
-    input_ids, attention_masks, labels = preprocess_reviews(df)
+    input_ids, attention_masks, labels = preprocess_reviews_processing(df)
     dataset = SentimentDataset(input_ids, attention_masks, labels)
     return DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
