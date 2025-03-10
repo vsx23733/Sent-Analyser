@@ -9,7 +9,7 @@ import numpy as np
 from tqdm import tqdm
 import logging
 import os
-from src.data_processing import *
+from data_processing import *
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
