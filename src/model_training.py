@@ -69,7 +69,7 @@ def evaluate(model, data_loader, device):
     report = classification_report(actual_labels, predictions)
     return avg_loss, accuracy, report
 
-def train_split(train_loader, val_loader):
+def train_split(train_loader):
         texts = []
         labels = []
 
@@ -91,11 +91,12 @@ def main():
     EPOCHS = 3
     LEARNING_RATE = 2e-5
     DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    texts , labels = train_split(train_loader)
+    
 
     logger.info(f"Using device: {DEVICE}")
 
     train_loader = prepare_dataloader('src/reviews.csv')
+    texts , labels = train_split(train_loader)
     train_texts, val_texts, train_labels, val_labels = train_test_split(
         texts, labels, test_size=0.2, random_state=SEED
     )
