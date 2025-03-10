@@ -9,6 +9,7 @@ import numpy as np
 from tqdm import tqdm
 import logging
 import os
+from src.data_preprocessing import prepare_dataloader
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -32,19 +33,9 @@ class SentimentDataset(Dataset):
         text = str(self.texts[idx])
         label = self.labels[idx]
 
-        encoding = self.tokenizer.encode_plus(
-            text,
-            add_special_tokens=True,
-            max_length=self.max_length,
-            padding='max_length',
-            truncation=True,
-            return_attention_mask=True,
-            return_tensors='pt'
-        )
-
         return {
-            'input_ids': encoding['input_ids'].flatten(),
-            'attention_mask': encoding['attention_mask'].flatten(),
+            'input_ids': 
+            'attention_mask': 
             'labels': torch.tensor(label, dtype=torch.long)
         }
 
