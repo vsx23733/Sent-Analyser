@@ -2,7 +2,7 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset, DataLoader
 from transformers import BertTokenizer
-from src.data_extraction import load_data, to_sentiment, create_sentiment_column
+from data_extraction import load_data, to_sentiment, create_sentiment_column
 
 # Load a BERT tokenizer
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
