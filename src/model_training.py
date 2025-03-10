@@ -9,7 +9,7 @@ import numpy as np
 from tqdm import tqdm
 import logging
 import os
-from src.data_preprocessing import prepare_dataloader
+from src.data_processing import *
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -19,25 +19,6 @@ SEED = 42
 torch.manual_seed(SEED)
 np.random.seed(SEED)
 
-class SentimentDataset(Dataset):
-    def __init__(self, texts, labels, tokenizer, max_length=128):
-        self.texts = texts
-        self.labels = labels
-        self.tokenizer = tokenizer
-        self.max_length = max_length
-
-    def __len__(self):
-        return len(self.texts)
-
-    def __getitem__(self, idx):
-        text = str(self.texts[idx])
-        label = self.labels[idx]
-
-        return {
-            'input_ids': 
-            'attention_mask': 
-            'labels': torch.tensor(label, dtype=torch.long)
-        }
 
 def train_epoch(model, data_loader, optimizer, device):
     model.train()
@@ -88,6 +69,21 @@ def evaluate(model, data_loader, device):
     report = classification_report(actual_labels, predictions)
     return avg_loss, accuracy, report
 
+def train_split(train_loader, val_loader):
+        texts = []
+        labels = []
+
+        for batch in train_loader:
+            input_ids = batch['input_ids']
+            attention_mask = batch['attention_mask']
+            batch_labels = batch['labels']
+
+            for i in range(len(input_ids)):
+                texts.append(tokenizer.decode(input_ids[i], skip_special_tokens=True))
+                labels.append(batch_labels[i].item())
+
+        return texts, labels
+
 def main():
     # Hyperparameters
     MAX_LENGTH = 128
@@ -95,20 +91,11 @@ def main():
     EPOCHS = 3
     LEARNING_RATE = 2e-5
     DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    texts , labels = train_split(train_loader)
 
     logger.info(f"Using device: {DEVICE}")
 
-    df = pd.read_csv('src/reviews.csv')
-
-    texts = df['content'].values  
-    # Convert scores to binary sentiment (1-2 → 0 (negative), 4-5 → 1 (positive))
-    df['sentiment'] = df['score'].apply(lambda x: 0 if x <= 2 else 1 if x >= 4 else None)
-    # Remove (score = 3) as they are neutral 
-    df = df.dropna(subset=['sentiment'])
-    
-    texts = df['content'].values
-    labels = df['sentiment'].values.astype(int)
-
+    train_loader = prepare_dataloader('src/reviews.csv')
     train_texts, val_texts, train_labels, val_labels = train_test_split(
         texts, labels, test_size=0.2, random_state=SEED
     )
@@ -116,7 +103,7 @@ def main():
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertForSequenceClassification.from_pretrained(
         'bert-base-uncased',
-        num_labels=2,  # binary class 
+        num_labels=3,  # binary class 
         output_attentions=False,
         output_hidden_states=False
     )
