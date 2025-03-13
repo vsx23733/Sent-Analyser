@@ -24,11 +24,14 @@ TEAM_PROJECT
 │   ├── model_training.py     # Model training script
 │   ├── data_extraction.py    # Data extraction and cleaning functions
 │   ├── data_processing.py    # Data preprocessing and transformation
-│   ├── predictions           # Directory to store predictions
 │   ├── predictions.json      # Saved prediction results in JSON format
 │   └── reviews.csv           # Dataset for training/evaluation
 ├── tests
-│   └── unit                  # Unit tests for different modules
+│   └── unit
+|     ├── test_data_extraction.py    # Test workflow for the data extraction pipeline
+│     ├── test_data_processing.py    # Test workflow for the data processing pipeline
+│     ├── test_model_training.py     # Test workflow for the model training pipeline 
+│     └── test_inference.py          # Test workflow for the model inference pipeline
 ├── .venv                     # Virtual environment
 └── .gitignore                # Ignored files and folders
 ```
