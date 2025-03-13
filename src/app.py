@@ -1,6 +1,6 @@
 import streamlit as st
 import torch
-from inference import SentimentPredictor  # Importing the predictor class
+from inference import SentimentPredictor 
 import json
 
 st.set_page_config(page_title="Sentiment Analysis App", page_icon="🔍")
@@ -18,7 +18,7 @@ def save_prediction(sentence, sentiment):
         with open("src/predictions.json", "r") as file:
             dict_content = json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
-        dict_content = {}  # Initialize if file is missing or empty
+        dict_content = {}
 
     prediction_id = len(dict_content) + 1
     dict_content[prediction_id] = [sentence, sentiment]
@@ -55,9 +55,9 @@ def main():
                 st.write(f"- Positive: {probabilities['Positive']:.4f}")
 
                 prediction = save_prediction(txt_input, sentiment)
-                predictions[prediction[0]] = prediction[1]  # Corrected this line
+                predictions[prediction[0]] = prediction[1]
                 
-                st.info(f"✅ Prediction saved with ID {len(predictions)}.")
+                st.info(f"✅ Prediction saved successfully ⚡")
 
             except Exception as e:
                 st.error(f"❌ Error: {str(e)}")
