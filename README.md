@@ -30,7 +30,7 @@ TEAM_PROJECT
 │   └── unit
 |     ├── test_data_extraction.py    # Test workflow for the data extraction pipeline
 │     ├── test_data_processing.py    # Test workflow for the data processing pipeline
-│     ├── test_model_training.py     # Test workflow for the model training pipeline 
+│     ├── test_model_training.py     # Test workflow for the model training pipeline
 │     └── test_inference.py          # Test workflow for the model inference pipeline
 ├── .venv                     # Virtual environment
 └── .gitignore                # Ignored files and folders
@@ -68,7 +68,6 @@ TEAM_PROJECT
 3. The prediction and probabilities are displayed on the screen.
 4. The result is saved in predictions.json for future reference.
 
-
 ## 📊 Example Results
 
 <!-- screenshot of the app's output -->
@@ -91,6 +90,34 @@ Unit tests are located in the tests/unit directory. You can run them using:
 pytest tests/unit
 ```
 
+## 📝 Technical Details and Results
+
+This section covers the technical details of the model, training process, evaluation metrics, and detailed performance analysis.
+
+### Model Architecture
+
+We use a pre-trained BERT model (bert-base-uncased) fine-tuned for sentiment classification. The model has three output classes: Positive, Neutral, and Negative.
+
+### Training and Fine-Tuning
+- The model is trained on a sentiment analysis dataset.
+- Fine-tuning is performed with the AdamW optimizer and cross-entropy loss.
+- Training time: Approximately X hours on GPU.
+- Batch size: 16, Learning rate: 5e-5.
+
+### Evaluation Metrics
+- Accuracy: X%
+- Precision, Recall, F1-score for each class.
+- Confusion Matrix and ROC-AUC scores.
+- Classification report with metrics per class.
+
+### Results and Analysis
+Include screenshots and visualizations of classification reports, confusion matrices, and loss/accuracy plots.
+
+### Challenges and Improvements
+- Handling class imbalance.
+- Mitigating overfitting through dropout and regularization.
+- Optimizing hyperparameters for best performance.
+
 ## 🙏 Credits
 
 - Created with ❤️ by Axel & Asser.
@@ -100,7 +127,6 @@ pytest tests/unit
 ## 🌐 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-
 
 ## 💡 Future Improvements
 
