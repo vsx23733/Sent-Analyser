@@ -69,20 +69,6 @@ def evaluate(model, data_loader, device):
     report = classification_report(actual_labels, predictions)
     return avg_loss, accuracy, report
 
-def train_split(train_loader):
-        texts = []
-        labels = []
-
-        for batch in train_loader:
-            input_ids = batch['input_ids']
-            attention_mask = batch['attention_mask']
-            batch_labels = batch['labels']
-
-            for i in range(len(input_ids)):
-                texts.append(tokenizer.decode(input_ids[i], skip_special_tokens=True))
-                labels.append(batch_labels[i].item())
-
-        return texts, labels
 
 def main():
     # Hyperparameters
@@ -95,11 +81,7 @@ def main():
 
     logger.info(f"Using device: {DEVICE}")
 
-    train_loader = prepare_dataloader('src/reviews.csv')
-    texts , labels = train_split(train_loader)
-    train_texts, val_texts, train_labels, val_labels = train_test_split(
-        texts, labels, test_size=0.2, random_state=SEED
-    )
+    train_loader, val_loader = prepare_dataloader('reviews.csv')
 
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertForSequenceClassification.from_pretrained(
@@ -110,12 +92,7 @@ def main():
     )
     model.to(DEVICE)
 
-    # Create datasets and dataloaders
-    train_dataset = SentimentDataset(train_texts, train_labels, tokenizer, MAX_LENGTH)
-    val_dataset = SentimentDataset(val_texts, val_labels, tokenizer, MAX_LENGTH)
 
-    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE)
 
     # Initialize optimizer
     optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
