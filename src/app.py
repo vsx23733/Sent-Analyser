@@ -62,7 +62,7 @@ def main():
             st.warning("⚠️ Please enter some text.")
 
     st.markdown("---")
-    st.markdown("💡 **Credits:** Created with ❤️ by Your Name. Built using BERT and Streamlit.")
+    st.markdown("💡 **Credits:** Created with ❤️ by Axel & Asser. Built using BERT and Streamlit.")
 
     if st.button("📂 View Saved Predictions"):
         try:
