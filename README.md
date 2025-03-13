@@ -2,10 +2,6 @@
 
 Welcome to the Sentiment Analysis App! This project leverages a BERT-based model to predict the sentiment of a given sentence as Positive, Neutral, or Negative. The application is built using Streamlit, providing an intuitive and interactive user experience.
 
-## 🎥 Demo
-
---> Videos and Screenshots
-
 ## 🚀 Features
 
   - Real-Time Sentiment Analysis: Enter any text and get instant sentiment predictions.
@@ -53,6 +49,7 @@ TEAM_PROJECT
 
 3. Install the required packages:
    ```
+   pip install --upgrade pip
    pip install -r requirements.txt
    ```
 
@@ -67,10 +64,6 @@ TEAM_PROJECT
 2. The sentence is processed by the BERT-based model to predict the sentiment.
 3. The prediction and probabilities are displayed on the screen.
 4. The result is saved in predictions.json for future reference.
-
-## 📊 Example Results
-
-<!-- screenshot of the app's output -->
 
 ## 📂 Saved Predictions
 
@@ -101,22 +94,7 @@ We use a pre-trained BERT model (bert-base-uncased) fine-tuned for sentiment cla
 ### Training and Fine-Tuning
 - The model is trained on a sentiment analysis dataset.
 - Fine-tuning is performed with the AdamW optimizer and cross-entropy loss.
-- Training time: Approximately X hours on GPU.
 - Batch size: 16, Learning rate: 5e-5.
-
-### Evaluation Metrics
-- Accuracy: X%
-- Precision, Recall, F1-score for each class.
-- Confusion Matrix and ROC-AUC scores.
-- Classification report with metrics per class.
-
-### Results and Analysis
-Include screenshots and visualizations of classification reports, confusion matrices, and loss/accuracy plots.
-
-### Challenges and Improvements
-- Handling class imbalance.
-- Mitigating overfitting through dropout and regularization.
-- Optimizing hyperparameters for best performance.
 
 ## 🙏 Credits
 
