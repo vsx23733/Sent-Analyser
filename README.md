@@ -10,28 +10,6 @@ Welcome to the Sentiment Analysis App! This project leverages a BERT-based model
   - Prediction History: Saves predictions with an ID and the corresponding sentiment.
   - Exportable Predictions: Predictions are saved in a JSON file for easy access and analysis.
 
-## 🏗️ Project Structure
-
-```
-TEAM_PROJECT
-├── src
-│   ├── app.py                # Main Streamlit application
-│   ├── inference.py          # Sentiment prediction logic
-│   ├── model_training.py     # Model training script
-│   ├── data_extraction.py    # Data extraction and cleaning functions
-│   ├── data_processing.py    # Data preprocessing and transformation
-│   ├── predictions.json      # Saved prediction results in JSON format
-│   └── reviews.csv           # Dataset for training/evaluation
-├── tests
-│   └── unit
-|     ├── test_data_extraction.py    # Test workflow for the data extraction pipeline
-│     ├── test_data_processing.py    # Test workflow for the data processing pipeline
-│     ├── test_model_training.py     # Test workflow for the model training pipeline
-│     └── test_inference.py          # Test workflow for the model inference pipeline
-├── .venv                     # Virtual environment
-└── .gitignore                # Ignored files and folders
-```
-
 ## 📝 Installation
 
 1. Clone the repository:
