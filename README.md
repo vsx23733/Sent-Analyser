@@ -40,7 +40,7 @@ TEAM_PROJECT
 
 1. Clone the repository:
    ```
-   git clone https://github.com/username/sentiment-analysis-app.git
+   git clone https://github.com/asseromar/sentiment-analysis-app.git
    cd sentiment-analysis-app
    ```
 
