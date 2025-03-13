@@ -40,8 +40,8 @@ TEAM_PROJECT
 
 1. Clone the repository:
    ```
-   git clone https://github.com/asseromar/sentiment-analysis-app.git
-   cd sentiment-analysis-app
+   git clone https://github.com/asseromar/Sent-Analysis.git
+   cd Sent-Analysis
    ```
 
 2. Create and activate a virtual environment:
