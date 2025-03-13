@@ -12,18 +12,21 @@ def load_predictor():
 
 predictor = load_predictor()
 
-
+# Function to save predictions
 def save_prediction(sentence, sentiment):
-    dict_content = {}
-    with open("predictions.json", "r") as file:
-        dict_content = json.load(dict_content)
+    try:
+        with open("src/predictions.json", "r") as file:
+            dict_content = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        dict_content = {}  # Initialize if file is missing or empty
 
     prediction_id = len(dict_content) + 1
+    dict_content[prediction_id] = [sentence, sentiment]
 
-    with open("predictions.json", "w") as file:
-        json.dump({prediction_id : [sentence, sentiment]}, file, indent=4)
+    with open("src/predictions.json", "w") as file:
+        json.dump(dict_content, file, indent=4)
 
-    return [prediction_id , [sentence, sentiment]]
+    return prediction_id, [sentence, sentiment]
 
 
 def main():
@@ -52,7 +55,7 @@ def main():
                 st.write(f"- Positive: {probabilities['Positive']:.4f}")
 
                 prediction = save_prediction(txt_input, sentiment)
-                predictions[prediction[0]] = predictions[prediction[1]]
+                predictions[prediction[0]] = prediction[1]  # Corrected this line
                 
                 st.info(f"✅ Prediction saved with ID {len(predictions)}.")
 
@@ -66,7 +69,7 @@ def main():
 
     if st.button("📂 View Saved Predictions"):
         try:
-            with open("predictions.json", "r") as file:
+            with open("src/predictions.json", "r") as file: 
                 predictions = json.load(file)
 
             if predictions:
