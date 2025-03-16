@@ -14,7 +14,7 @@ Welcome to the Sentiment Analysis App! This project leverages a BERT-based model
 
 Check it out, here is a very small demo of the app!!
 
-[Demo of the Sent-Analysis App](assets/gif/demo.gif)
+![Demo of the Sent-Analysis App](assets/gif/demo.gif)
 
 
 ## 📝 Installation
