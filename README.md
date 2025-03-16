@@ -146,11 +146,11 @@ The model was trained on a dataset of Google reviews, and we evaluated its perfo
   
     ![Training Logs](assets/images/training_log_1.png)
 
-    Epoch 1:
+    Epoch 2:
   
     ![Training Logs](assets/images/training_log_2.png)
 
-    Epoch 1:
+    Epoch 3:
   
     ![Training Logs](assets/images/training_log_3.png)
 
