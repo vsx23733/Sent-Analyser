@@ -14,7 +14,7 @@ Welcome to the Sentiment Analysis App! This project leverages a BERT-based model
     - [Data Extraction and Processing](#data-extraction-and-processing)
     - [Model Architecture](#model-architecture)
     - [Training and Inference Results](#training-and-inference-results)
-8. [ Streamlit Sentiment Analysis App](#👨‍💻streamlit-sentiment-analysis-app)
+8. [ Streamlit Sentiment Analysis App](#-streamlit-sentiment-analysis-app)
 9. [🙏 Credits](#-credits)
 10. [🌐 License](#-license)
 11. [💡 Future Improvements](#-future-improvements)
