@@ -48,7 +48,15 @@ def main():
                 sentiment = result['sentiment']
                 probabilities = result['probabilities']
 
-                st.success(f"🎉 Predicted Sentiment: {sentiment}")
+                # Set the text color based on the sentiment
+                if sentiment == "Positive":
+                    sentiment_color = "blue"
+                elif sentiment == "Negative":
+                    sentiment_color = "red"
+                else:
+                    sentiment_color = "black"
+
+                st.markdown(f"<h3 style='color:{sentiment_color};'>🎉 Predicted Sentiment: {sentiment}</h3>", unsafe_allow_html=True)
                 st.write("### 🔢 Probabilities:")
                 st.write(f"- Negative: {probabilities['Negative']:.4f}")
                 st.write(f"- Neutral: {probabilities['Neutral']:.4f}")
