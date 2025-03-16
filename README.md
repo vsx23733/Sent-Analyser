@@ -34,8 +34,8 @@ Check out the demo of the app:
 
 3. Install the required packages:
    ```
-   pip install --upgrade pip
-   pip install -r requirements.txt
+   python -m pip install --upgrade pip
+   python -m pip install -r requirements.txt
    ```
 
 4. Run the Streamlit app:
@@ -140,9 +140,19 @@ The model architecture for this sentiment analysis task is based on BERT (Bidire
 The model was trained on a dataset of Google reviews, and we evaluated its performance based on several metrics, including training loss, validation loss, and classification accuracy.
 
 - Training Loss and Accuracy
-    During the training process, we monitored the training loss and accuracy for each epoch. The loss decreased progressively, indicating that the model was learning from the data. The accuracy also improved as the training proceeded,        reflecting the model's increasing ability to correctly classify sentiments. After each epoch, we evaluated the model on the validation set to measure its performance more comprehensively. We used metrics such as precision, recall,        and F1-score for each sentiment class (Negative, Neutral, and Positive).
+    During the training process, we monitored the training loss and accuracy for each epoch. The loss decreased progressively, indicating that the model was learning from the data. The accuracy also improved     as the training proceeded, reflecting the model's increasing ability to correctly classify sentiments. After each epoch, we evaluated the model on the validation set to measure its performance more           comprehensively. We used metrics such as precision, recall, and F1-score for each sentiment class (Negative, Neutral, and Positive).
   
-    ![Training Logs](assets/images/training_log.png)
+    Epoch 1:
+  
+    ![Training Logs](assets/images/training_log_1.png)
+
+    Epoch 2:
+  
+    ![Training Logs](assets/images/training_log_2.png)
+
+    Epoch 3:
+  
+    ![Training Logs](assets/images/training_log_3.png)
 
 
 - Inference Logs
