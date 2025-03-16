@@ -168,6 +168,25 @@ The model was trained on a dataset of Google reviews, and we evaluated its perfo
 
 
 
+### Streamlit Sentiment Analysis App
+
+Once the app is running, you will see a clean and interactive UI that prompts you to enter your text. The key elements of the UI include:
+
+  - Text Area: Where you can input the sentence for sentiment analysis.
+  - "Analyze Sentiment" Button: Click this button to trigger the sentiment prediction.
+  - Prediction Results: After clicking the button, the app displays the predicted sentiment along with probabilities for each sentiment class.
+  - Saved Predictions: You can click on "View Saved Predictions" to see all previously analyzed sentences and their corresponding sentiment scores.
+
+  ![Streamlit App](assets/images/streamlit_app.png)
+
+The app automatically saves every prediction, including:
+
+  - Sentence: The sentence you entered for analysis.
+  - Sentiment: The predicted sentiment (Positive, Neutral, Negative).
+
+  ![Predictions Saved](assets/images/saved_predictions.png)
+
+
 ## 🙏 Credits
 
 - Created with ❤️ by Axel & Asser.
