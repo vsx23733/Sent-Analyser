@@ -292,5 +292,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
   - Integrate more sentiment labels for fine-grained classification.
   - Add multi-language support.
-  - Enhance model accuracy with fine-tuning on additional datasets.
+  - Enhance model accuracy with fine-tuning on additional datasets to better predict the neutral class.
   - Improve the UI with more visualizations and insights.
