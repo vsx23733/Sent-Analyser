@@ -35,6 +35,7 @@ Check it out, here is a very small demo of the app!!
 ![Streamlit App](assets/images/streamlit_app.png)
 
 Git of the demo: 
+
 ![Demo of the Sent-Analysis App](assets/gif/demo.gif)
 
 
