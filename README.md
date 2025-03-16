@@ -4,7 +4,7 @@ Welcome to the Sentiment Analysis App! This project leverages a BERT-based model
 
 ## 📑 Table of Contents
 
-1.[🌲 Project Structure](#-project-structure)
+1. [🌲 Project Structure](#-project-structure)
 2. [🚀 Features](#-features)
 3. [🔥 Demo](#-demo)
 4. [📝 Installation](#-installation)
@@ -19,6 +19,7 @@ Welcome to the Sentiment Analysis App! This project leverages a BERT-based model
 10. [🙏 Credits](#-credits)
 11. [🌐 License](#-license)
 12. [💡 Future Improvements](#-future-improvements)
+
 
 
 ## 🌲 Project Structure
