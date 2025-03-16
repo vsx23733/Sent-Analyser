@@ -34,8 +34,8 @@ Check out the demo of the app:
 
 3. Install the required packages:
    ```
-   pip install --upgrade pip
-   pip install -r requirements.txt
+   python -m pip install --upgrade pip
+   python -m pip install -r requirements.txt
    ```
 
 4. Run the Streamlit app:
