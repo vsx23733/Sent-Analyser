@@ -149,9 +149,11 @@ The model was trained on a dataset of Google reviews, and we evaluated its perfo
     Finally, during the inference phase, the model was used to predict the sentiment of new reviews. The logs below show the model's predictions on sample inputs, including the predicted sentiment and the corresponding probabilities for      each class.
 
     Positive sentiment prediction inference: 
+
     ![Inference Logs](assets/images/inference_log_1.png)
 
     Negative sentiment prediction inference: 
+
     ![Inference Logs](assets/images/inference_log_2.png)
 
 
