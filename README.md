@@ -142,13 +142,17 @@ The model was trained on a dataset of Google reviews, and we evaluated its perfo
 - Training Loss and Accuracy
     During the training process, we monitored the training loss and accuracy for each epoch. The loss decreased progressively, indicating that the model was learning from the data. The accuracy also improved as the training proceeded,        reflecting the model's increasing ability to correctly classify sentiments. After each epoch, we evaluated the model on the validation set to measure its performance more comprehensively. We used metrics such as precision, recall,        and F1-score for each sentiment class (Negative, Neutral, and Positive).
   
-    ![Training Logs](assets/images/sentiment_analysis_screenshot.png)
+    ![Training Logs](assets/images/training_log.png)
 
 
 - Inference Logs
     Finally, during the inference phase, the model was used to predict the sentiment of new reviews. The logs below show the model's predictions on sample inputs, including the predicted sentiment and the corresponding probabilities for      each class.
 
-    ![Inference Logs](assets/images/sentiment_analysis_screenshot.png)
+    Positive sentiment prediction inference: 
+    ![Inference Logs](assets/images/inference_log_1.png)
+
+    Negative sentiment prediction inference: 
+    ![Inference Logs](assets/images/inference_log_2.png)
 
 
 
