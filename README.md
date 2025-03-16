@@ -190,7 +190,7 @@ The model was trained on a dataset of Google reviews, and we evaluated its perfo
 
 
 
-### Streamlit Sentiment Analysis App
+### 👨‍💻 Streamlit Sentiment Analysis App
 
 Once the app is running, you will see a clean and interactive UI that prompts you to enter your text. The key elements of the UI include:
 
