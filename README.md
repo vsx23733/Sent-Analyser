@@ -2,6 +2,24 @@
 
 Welcome to the Sentiment Analysis App! This project leverages a BERT-based model to predict the sentiment of a given sentence as Positive, Neutral, or Negative. The application is built using Streamlit, providing an intuitive and interactive user experience.
 
+## 📑 Table of Contents
+
+1. [🚀 Features](#-features)
+2. [🔥 Demo](#-demo)
+3. [📝 Installation](#-installation)
+4. [🧠 How It Works](#-how-it-works)
+5. [📂 Saved Predictions](#-saved-predictions)
+6. [🧪 Running Tests](#-running-tests)
+7. [📝 Technical Details and Results](#-technical-details-and-results)
+    - [Data Extraction and Processing](#data-extraction-and-processing)
+    - [Model Architecture](#model-architecture)
+    - [Training and Inference Results](#training-and-inference-results)
+8. [Streamlit Sentiment Analysis App](#streamlit-sentiment-analysis-app)
+9. [🙏 Credits](#-credits)
+10. [🌐 License](#-license)
+11. [💡 Future Improvements](#-future-improvements)
+
+
 ## 🚀 Features
 
   - Real-Time Sentiment Analysis: Enter any text and get instant sentiment predictions.
@@ -185,6 +203,14 @@ The app automatically saves every prediction, including:
   - Sentiment: The predicted sentiment (Positive, Neutral, Negative).
 
   ![Predictions Saved](assets/images/saved_predictions.png)
+
+  - Color mapping system (color of the text change based on the predicted sentiment)
+
+  Negative sentiment: 
+  ![Predictions Saved](assets/images/color_negative.png)
+
+  Positive sentiment:
+  ![Predictions Saved](assets/images/color_positive.png)
 
 
 ## 🙏 Credits
