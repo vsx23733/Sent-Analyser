@@ -1,7 +1,8 @@
 import unittest
 import pandas as pd
 from io import StringIO
-from src.data_extraction import load_data, to_sentiment, create_sentiment_column  # Replace with the actual module name
+from src.data_extraction import load_data, to_sentiment, create_sentiment_column
+import os
 
 class TestReviewExtraction(unittest.TestCase):
     
@@ -9,7 +10,8 @@ class TestReviewExtraction(unittest.TestCase):
         """
         Set up sample data for testing.
         """
-        self.csv_path = r""".\src\reviews.csv""" 
+        file_path = os.path.join(os.path.dirname(__file__), '../../src/reviews.csv')
+        self.csv_path = file_path 
         self.df = load_data(self.csv_path)
     
     
