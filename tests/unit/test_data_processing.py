@@ -10,7 +10,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 from src.data_extraction import load_data, to_sentiment, create_sentiment_column
 from src.data_processing import preprocess_reviews_processing, SentimentDataset, prepare_dataloader
 
-# Sample test data
 def sample_dataframe():
     file_path = os.path.join(os.path.dirname(__file__), '../../src/reviews.csv')
     return load_data(path_to_data=file_path)
