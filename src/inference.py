@@ -2,12 +2,14 @@ import torch
 import argparse
 from transformers import BertTokenizer, BertForSequenceClassification
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class SentimentPredictor:
-    def __init__(self, model_path='models/best_model.pt', device=None):
+    model_path = os.path.join(os.path.dirname(__file__), '../models/best_model.pt')
+    def __init__(self, model_path=model_path, device=None):
         """
         Initialize the sentiment predictor with a trained model.
         
