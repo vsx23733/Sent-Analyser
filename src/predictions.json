@@ -42,5 +42,9 @@
     "11": [
         "I love you",
         "Positive"
+    ],
+    "12": [
+        "Created with \u2764\ufe0f by Axel & Asser. Built using BERT and Streamlit.",
+        "Positive"
     ]
 }

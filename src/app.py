@@ -15,7 +15,7 @@ predictor = load_predictor()
 # Function to save predictions
 def save_prediction(sentence, sentiment):
     try:
-        with open("src/predictions.json", "r") as file:
+        with open("predictions.json", "r") as file:
             dict_content = json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
         dict_content = {}
@@ -23,7 +23,7 @@ def save_prediction(sentence, sentiment):
     prediction_id = len(dict_content) + 1
     dict_content[prediction_id] = [sentence, sentiment]
 
-    with open("src/predictions.json", "w") as file:
+    with open("predictions.json", "w") as file:
         json.dump(dict_content, file, indent=4)
 
     return prediction_id, [sentence, sentiment]
@@ -77,7 +77,7 @@ def main():
 
     if st.button("📂 View Saved Predictions"):
         try:
-            with open("src/predictions.json", "r") as file: 
+            with open("predictions.json", "r") as file: 
                 predictions = json.load(file)
 
             if predictions:
