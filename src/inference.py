@@ -96,8 +96,9 @@ class SentimentPredictor:
 
 def main():
     parser = argparse.ArgumentParser(description='Predict sentiment for input text')
+    model_path = os.path.join(os.path.dirname(__file__), '../models/best_model.pt')
     parser.add_argument('--text', type=str, help='Text to analyze')
-    parser.add_argument('--model_path', type=str, default='models/best_model.pt',
+    parser.add_argument('--model_path', type=str, default=model_path,
                       help='Path to the trained model')
     args = parser.parse_args()
     
