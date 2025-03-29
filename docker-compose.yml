@@ -1,0 +1,14 @@
+version: "3.12.7"
+
+services:
+  sentiment_analysis:
+    image: sentiment-analysis-app
+    build: .
+    ports:
+      - "8501:8501"  
+    volumes:
+      - ./models:/app/models  
+      - ./logs:/app/logs  
+      - ./data:/app/data 
+      - ./src:/app/src 
+    restart: always  

@@ -1,0 +1,39 @@
+name: Model Evaluation
+
+on:
+  workflow_run:
+    workflows: ["Test Workflow"]
+    types:
+      - completed
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12.7'
+
+    - name: Load model and evaluate
+      run: |
+        python evaluate_model.py  
+
+    - name: Store performance metrics as artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: evaluation-metrics
+        path: metrics.json  # metrics in a JSON file
+
+    - name: Fail if performance below threshold
+      run: |
+        performance=$(python get_performance.py)  # Replace with how you get performance
+        if (( $(echo "$performance < 0.8" | bc -l) )); then  # 0.8 is an example threshold
+          echo "Performance is below threshold" 
+          exit 1
+        fi
