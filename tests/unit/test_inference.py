@@ -1,13 +1,15 @@
 import unittest
 import torch
 from src.inference import SentimentPredictor
+import os
 
 
 class TestSentimentPredictor(unittest.TestCase):
 
     def setUp(self):
-        """Set up the predictor with a default model path."""
-        self.predictor = SentimentPredictor()
+        """Set up the predictor with a default model path and device."""
+        device = os.getenv("DEVICE", "cpu") 
+        self.predictor = SentimentPredictor(device=device)
 
     def test_model_loading(self):
         """Test if the model loads correctly."""

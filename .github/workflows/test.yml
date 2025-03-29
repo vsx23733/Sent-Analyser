@@ -27,9 +27,11 @@ jobs:
         pip install -r requirements.txt 
 
     - name: Run unit and integration tests
+      env:
+        DEVICE: cpu  
       run: |
         pip install pytest pytest-cov
-        pytest ./tests/unit --device cpu
+        pytest ./tests/unit
 
     - name: Lint code
       run: |
