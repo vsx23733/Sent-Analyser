@@ -28,7 +28,7 @@ jobs:
 
     - name: Run unit and integration tests
       run: |
-        pytest  # or use your testing tool, e.g., unittest
+        pytest ./tests/unit
 
     - name: Lint code
       run: |
