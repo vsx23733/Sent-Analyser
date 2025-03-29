@@ -24,7 +24,7 @@ jobs:
         with:
           registry: docker.io
           username: ${{ secrets.Menegraal }}
-          password: ${{ secrets.Qiflk0Se@) }}
+          password: ${{ secrets.aivancitymlops }}
 
       - name: Build Docker image
         run: |
