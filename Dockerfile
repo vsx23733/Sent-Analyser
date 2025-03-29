@@ -4,8 +4,10 @@ FROM python:3.12.7-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Copy the requirements file and model into the container
 COPY requirements.txt /app/requirements.txt
+COPY models/best_model.pt /app/models/best_model.pt
+
 
 # Install required dependencies
 RUN pip install --no-cache-dir -r requirements.txt

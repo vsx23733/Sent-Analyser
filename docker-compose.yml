@@ -1,14 +1,27 @@
-version: "3.12.7"
+version: '3.8'
 
 services:
-  sentiment_analysis:
-    image: sentiment-analysis-app
+  sentiment_predictor:
     build: .
+    container_name: sentiment_predictor
     ports:
       - "8501:8501"  
     volumes:
-      - ./models:/app/models  
-      - ./logs:/app/logs  
-      - ./data:/app/data 
-      - ./src:/app/src 
-    restart: always  
+      - sentiment_models:/app/models  
+      - sentiment_logs:/app/logs      
+      - sentiment_data:/app/data      
+    environment:
+      - DEVICE=cpu  
+    networks:
+      - sentiment_net
+
+# Volumes for persistent storage
+volumes:
+  sentiment_models:
+  sentiment_logs:
+  sentiment_data:
+
+# Networks for communication between containers
+networks:
+  sentiment_net:
+    driver: bridge

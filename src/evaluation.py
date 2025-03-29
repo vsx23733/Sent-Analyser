@@ -64,7 +64,7 @@ class SentimentEvaluator:
         all_labels = []
         
         # Process each text and predict the sentiment
-        for text in test_texts:
+        for i, text in enumerate(test_texts):
             encoding = self.tokenizer(
                 text,
                 truncation=True,
@@ -82,7 +82,8 @@ class SentimentEvaluator:
                 prediction = torch.argmax(probabilities, dim=1).item()
                 
             all_preds.append(prediction)
-            all_labels.append(test_labels)
+            all_labels.append(test_labels[i])  # Use the individual label here
+
         
         # Compute accuracy
         accuracy = accuracy_score(all_labels, all_preds)
