@@ -33,3 +33,4 @@ jobs:
       - name: Push Docker image to DockerHub
         run: |
           docker push menegraal/sent_predictor:latest
+
