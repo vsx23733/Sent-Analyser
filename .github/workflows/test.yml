@@ -28,6 +28,7 @@ jobs:
 
     - name: Run unit and integration tests
       run: |
+        pip install pytest pytest-cov
         pytest ./tests/unit
 
     - name: Lint code
