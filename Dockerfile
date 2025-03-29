@@ -5,7 +5,7 @@ FROM python:3.12.7-slim
 WORKDIR /app
 
 # Copy the requirements file into the container
-COPY requirements.txt .
+COPY requirements.txt /app/requirements.txt
 
 # Install required dependencies
 RUN pip install --no-cache-dir -r requirements.txt
