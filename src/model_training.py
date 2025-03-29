@@ -115,7 +115,7 @@ def main():
             best_accuracy = val_accuracy
             if not os.path.exists('models'):
                 os.makedirs('models')
-            torch.save(model.state_dict(), 'models/best_model.pt')
+            torch.save(model.state_dict(), 'models/best_model.pt', _use_new_zipfile_serialization=False)
             logger.info("Saved new best model")
 
     logger.info("Training completed!")

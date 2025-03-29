@@ -39,7 +39,7 @@ class SentimentPredictor:
         
         # Load trained weights
         try:
-            self.model.load_state_dict(torch.load(model_path, map_location=self.device))
+            self.model.load_state_dict(torch.load(model_path, map_location=self.device, weights_only=False))
             logger.info(f"Model loaded successfully from {model_path}")
         except Exception as e:
             logger.error(f"Error loading model from {model_path}: {str(e)}")
