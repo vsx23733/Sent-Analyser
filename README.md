@@ -1,6 +1,6 @@
 # Sentiment Analysis App 🌟
 
-Welcome to the Sentiment Analysis App! This project leverages a BERT-based model to predict the sentiment of a given sentence as Positive, Neutral, or Negative. The application is built using Streamlit, providing an intuitive and interactive user experience.
+Welcome to the Sentiment Analysis App AKA the SentAnalyzer! This project leverages a BERT-based model to predict the sentiment of a given sentence as Positive, Neutral, or Negative. The application is built for those who wants to create their own dataset based on text and sentiment. This app uses a simple Ui using streamlit and a prediction saving system to construct progressively your dataset.
 
 ## 📑 Table of Contents
 
@@ -16,9 +16,10 @@ Welcome to the Sentiment Analysis App! This project leverages a BERT-based model
     - [Model Architecture](#model-architecture)
     - [Training and Inference Results](#training-and-inference-results)
 9. [👨‍💻 Streamlit Sentiment Analysis App](#-streamlit-sentiment-analysis-app)
-10. [🙏 Credits](#-credits)
-11. [🌐 License](#-license)
-12. [💡 Future Improvements](#-future-improvements)
+10. [GitHub automation and Containerization with Docker](#github-automation-and-containerization-with-docker)
+11. [🙏 Credits](#-credits)
+12. [🌐 License](#-license)
+13. [💡 Future Improvements](#-future-improvements)
 
 
 
@@ -276,6 +277,31 @@ The app automatically saves every prediction, including:
 
   Positive sentiment:
   ![Predictions Saved](assets/images/color_positive.png)
+
+
+## GitHub automation and Containerization with Docker
+
+The workflows associated to this project successively test the robustness/quality of the code for anyone who may want to use the source code, the evaluation of the model and the containerization of the docker image of the project for easy distribution and facilitation regarding the "protability" of the project. 
+
+### Test workflow 
+
+For the test workflow, it gets triggered at every push request to the repo to ensures that the changes made don’t break the current working application. We have inside that workflow several jobs running, but the most important ones are the python setup, the dependencies installment, the unit test running and linting for code quality assessment. 
+
+Screenshot of the test worflow successfully completed
+
+### Evaluation worflow
+
+For the evaluate workflow the most important jobs are the performance computation for the actual model and the performance assessment. 
+The performance computation is basically just running the python script for the evaluation.py which output the results of the evaluation as a Json file (metrics.json). Then the results of the evaluation are saved as artefacts by another job.
+
+Screenshot of the results of the evaluation
+
+### Building worflow
+
+Concerning the build workflow which builds the docker image and published it to docker hub. 
+For the Dockerfile, the working directory is initialized as app, then we copy all required files so the scripts contained inside src folder, the requirement.txt and the trained model already saved also. All the dependencies needed are installed (pip install -r requirements.txt) and we create the required directory for consistent storage. Then we expose the entrypoint for the streamlit app and the command to run the streamlit app automatically. 
+
+Video of the image running with the streamlit app. 
 
 
 ## 🙏 Credits
