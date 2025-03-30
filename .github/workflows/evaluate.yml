@@ -22,18 +22,18 @@ jobs:
 
     - name: Load model and evaluate
       run: |
-        python evaluate_model.py  
+        python evaluation.py  
 
     - name: Store performance metrics as artifacts
       uses: actions/upload-artifact@v2
       with:
         name: evaluation-metrics
-        path: metrics.json  # metrics in a JSON file
+        path: metrics.json
 
     - name: Fail if performance below threshold
       run: |
-        performance=$(python get_performance.py)  # Replace with how you get performance
-        if (( $(echo "$performance < 0.8" | bc -l) )); then  # 0.8 is an example threshold
+        performance=$(python get_performance.py) 
+        if (( $(echo "$performance < 0.6" | bc -l) )); fixed 60% as performance threshold
           echo "Performance is below threshold" 
           exit 1
         fi

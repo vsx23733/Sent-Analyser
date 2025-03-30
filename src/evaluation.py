@@ -30,14 +30,12 @@ class SentimentEvaluator:
         
         logger.info(f"Using device: {self.device}")
         
-        # Load tokenizer and model
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         self.model = BertForSequenceClassification.from_pretrained(
             'bert-base-uncased',
             num_labels=3
         )
         
-        # Load trained weights
         try:
             self.model.load_state_dict(torch.load(model_path, map_location=self.device))
             logger.info(f"Model loaded successfully from {model_path}")
@@ -82,10 +80,9 @@ class SentimentEvaluator:
                 prediction = torch.argmax(probabilities, dim=1).item()
                 
             all_preds.append(prediction)
-            all_labels.append(test_labels[i])  # Use the individual label here
+            all_labels.append(test_labels[i]) 
 
         
-        # Compute accuracy
         accuracy = accuracy_score(all_labels, all_preds)
         
         # Generate classification report
@@ -96,7 +93,7 @@ class SentimentEvaluator:
             'classification_report': report
         }
 
-def save_evaluation_results(results, output_file='output.json'):
+def save_evaluation_results(results, output_file='metrics.json'):
     """
     Save the evaluation results to a JSON file.
     
