@@ -33,6 +33,11 @@ jobs:
         pip install pytest pytest-cov
         pytest ./tests/unit
 
+    - name: Code Reformating
+      run: |
+        pip install black
+        black ./src
+
     - name: Lint code
       run: |
         pip install pylint
