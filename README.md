@@ -301,6 +301,13 @@ Screenshot of the results of the evaluation
 Concerning the build workflow which builds the docker image and published it to docker hub. 
 For the Dockerfile, the working directory is initialized as app, then we copy all required files so the scripts contained inside src folder, the requirement.txt and the trained model already saved also. All the dependencies needed are installed (pip install -r requirements.txt) and we create the required directory for consistent storage. Then we expose the entrypoint for the streamlit app and the command to run the streamlit app automatically. 
 
+Docker Image of the project Running: 
+![Docker image running](assets/images/run_docker_image_1.png)
+
+
+![Docker image running](assets/images/run_docker_image_2.png)
+
+
 Video of the image running with the streamlit app. 
 
 
