@@ -5,3 +5,5 @@ numpy>=1.19.5
 scikit-learn>=0.24.2
 tqdm>=4.62.0 
 streamlit
+pytest>=7.0.0
+pytest-cov>=4.0.0
