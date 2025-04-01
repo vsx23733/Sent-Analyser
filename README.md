@@ -279,36 +279,125 @@ The app automatically saves every prediction, including:
   ![Predictions Saved](assets/images/color_positive.png)
 
 
-## GitHub automation and Containerization with Docker
+## **Docker Setup**
 
-The workflows associated to this project successively test the robustness/quality of the code for anyone who may want to use the source code, the evaluation of the model and the containerization of the docker image of the project for easy distribution and facilitation regarding the "protability" of the project. 
+### **Dockerfile**
+The `Dockerfile` defines how the containerized application is built and run. The key steps include:
 
-### Test workflow 
+1. **Base Image**  
+   - Uses `python:3.12.7-slim` as the base image, which is a lightweight version of Python 3.12.7.
 
-For the test workflow, it gets triggered at every push request to the repo to ensures that the changes made don’t break the current working application. We have inside that workflow several jobs running, but the most important ones are the python setup, the dependencies installment, the unit test running and linting for code quality assessment. 
+2. **Working Directory**  
+   - Sets `/app` as the working directory inside the container.
 
-Screenshot of the test worflow successfully completed
+3. **Copying Dependencies and Model**  
+   - Copies `requirements.txt` for dependency installation.
+   - Copies `best_model.pt` to ensure the model is available in the container.
 
-### Evaluation worflow
+4. **Dependency Installation**  
+   - Installs required Python packages using `pip` with `--no-cache-dir` to keep the image lightweight.
 
-For the evaluate workflow the most important jobs are the performance computation for the actual model and the performance assessment. 
-The performance computation is basically just running the python script for the evaluation.py which output the results of the evaluation as a Json file (metrics.json). Then the results of the evaluation are saved as artefacts by another job.
+5. **Creating Persistent Storage Directories**  
+   - Ensures `/app/models`, `/app/logs`, and `/app/data` exist inside the container.
 
-Screenshot of the results of the evaluation
+6. **Copying Application Source Code**  
+   - Copies the `src/` directory (which contains the application logic) and `README.md`.
 
-### Building worflow
+7. **Exposing Ports**  
+   - Exposes port `8501`, which is used by Streamlit.
 
-Concerning the build workflow which builds the docker image and published it to docker hub. 
-For the Dockerfile, the working directory is initialized as app, then we copy all required files so the scripts contained inside src folder, the requirement.txt and the trained model already saved also. All the dependencies needed are installed (pip install -r requirements.txt) and we create the required directory for consistent storage. Then we expose the entrypoint for the streamlit app and the command to run the streamlit app automatically. 
+8. **Defining the Entry Point**  
+   - Sets the default command to run Streamlit using `CMD ["streamlit", "run", "src/app.py"]`.
 
-Docker Image of the project Running: 
-![Docker image running](assets/images/run_docker_image_1.png)
+---
 
+### **Docker Compose (`docker-compose.yml`)**
+The `docker-compose.yml` file defines how the containerized application should be orchestrated. The main parts:
 
-![Docker image running](assets/images/run_docker_image_2.png)
+1. **Service Definition (`sentiment_predictor`)**  
+   - Specifies the container name: `sentiment_predictor`.
+   - Builds the container from the `Dockerfile`.
+   - Maps port `8501` from the container to `8501` on the host.
 
+2. **Persistent Storage with Volumes**  
+   - Mounts three volumes:
+     - `sentiment_models` → `/app/models`
+     - `sentiment_logs` → `/app/logs`
+     - `sentiment_data` → `/app/data`
+   - This ensures data is preserved between container restarts.
 
-Video of the image running with the streamlit app. 
+3. **Environment Variables**  
+   - Defines `DEVICE=cpu` to configure inference to run on the CPU.
+
+4. **Network Configuration**  
+   - Uses `sentiment_net` network with a bridge driver for isolated communication between containers.
+
+---
+
+## **CI/CD Workflows (GitHub Actions)**
+
+### **Test Workflow (`test.yaml`)**
+This workflow ensures the code is properly tested before merging into `master`. It does:
+
+1. **Triggers**  
+   - Runs on pushes and pull requests targeting the `master` branch.
+
+2. **Job: `test`**  
+   - Runs on `ubuntu-latest`.
+
+3. **Steps:**
+   - **Checkout repository** → Pulls the latest code from GitHub.
+   - **Set up Python** → Uses Python 3.12.7.
+   - **Install dependencies** → Installs required Python libraries from `requirements.txt`.
+   - **Run unit and integration tests** → Uses `pytest` to test code inside `tests/unit`.
+   - **Code reformatting** → Uses `black` to auto-format code.
+   - **Linting** → Runs `pylint` to check for code quality issues.
+
+---
+
+### **Model Evaluation Workflow (`evaluate.yaml`)**
+This workflow ensures the model performs above a predefined threshold before deployment.
+
+1. **Triggers**  
+   - Runs on pushes and pull requests to `master`.
+
+2. **Job: `evaluate`**  
+   - Runs on `ubuntu-latest`.
+
+3. **Steps:**
+   - **Checkout repository** → Pulls the latest code.
+   - **Set up Python** → Installs Python 3.12.7.
+   - **Load and evaluate model** → Runs `evaluation.py` to assess model performance.
+   - **Store evaluation metrics** → Saves `metrics.json` as an artifact.
+   - **Fail if performance is below threshold**  
+     - Runs `get_performance.py`, extracts the model performance score, and fails if it's below `0.59`.
+
+---
+
+### **Docker Build Workflow (`build.yaml`)**
+This workflow automates the process of building and pushing the Docker image to DockerHub.
+
+1. **Triggers**  
+   - Runs on pushes and pull requests to `master`.
+
+2. **Job: `build`**  
+   - Runs on `ubuntu-latest`.
+
+3. **Steps:**
+   - **Checkout repository** → Pulls the latest code.
+   - **Set up Docker Buildx** → Enables advanced Docker image building features.
+   - **Log in to DockerHub** → Uses `DOCKER_USERNAME` and `DOCKER_PASSWORD` secrets for authentication.
+   - **Build Docker image** → Builds the image with the tag `menegraal/sent_predictor:latest`.
+   - **Push to DockerHub** → Uploads the image to the Docker registry.
+
+---
+
+This setup ensures:
+- **Code quality and testing** before merging (`test.yaml`).
+- **Model evaluation** to maintain accuracy (`evaluate.yaml`).
+- **Automated container builds and deployments** (`build.yaml`).
+- **A lightweight, efficient Dockerized environment** for deployment.
+
 
 
 ## 🙏 Credits
