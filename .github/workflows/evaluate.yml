@@ -21,12 +21,25 @@ jobs:
       with:
         python-version: '3.12.7'
 
+    - name: Cache pip dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt 
+
     - name: Load model and evaluate
       run: |
         python evaluation.py  
 
     - name: Store performance metrics as artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: evaluation-metrics
         path: metrics.json
@@ -34,7 +47,8 @@ jobs:
     - name: Fail if performance below threshold
       run: |
         performance=$(python get_performance.py) 
-        if (( $(echo "$performance < 0.59" | bc -l) )); then
+        if (( $(echo "$performance < 0.59" | bc -l) )); fixed 60% as performance threshold
           echo "Performance is below threshold" 
           exit 1
         fi
+        echo "Performance is above threshold"
