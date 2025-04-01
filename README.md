@@ -28,25 +28,37 @@ Welcome to the Sentiment Analysis App AKA the SentAnalyzer! This project leverag
 ```
 📦 
 ├─ .gitattributes
+├─ .github
+│  └─ workflows
+│     ├─ build.yml
+│     ├─ evaluate.yml
+│     └─ test.yml
 ├─ .gitignore
+├─ Dockerfile
 ├─ LICENSE
 ├─ README.md
 ├─ assets
 │  ├─ gif
 │  │  └─ demo.gif
 │  └─ images
+│     ├─ build_workflow.png
 │     ├─ color_negative.png
 │     ├─ color_positive.png
 │     ├─ inference_log_1.png
 │     ├─ inference_log_2.png
+│     ├─ run_docker_image_1.png
+│     ├─ run_docker_image_2.png
 │     ├─ saved_predictions.png
 │     ├─ streamlit_app.png
 │     ├─ training_log.png
 │     ├─ training_log_1.png
 │     ├─ training_log_2.png
 │     └─ training_log_3.png
+├─ docker-compose.yml
+├─ metrics.json
 ├─ models
 │  └─ best_model.pt
+├─ predictions.json
 ├─ requirements.txt
 ├─ src
 │  ├─ __init__.py
@@ -60,6 +72,8 @@ Welcome to the Sentiment Analysis App AKA the SentAnalyzer! This project leverag
 │  ├─ app.py
 │  ├─ data_extraction.py
 │  ├─ data_processing.py
+│  ├─ evaluation.py
+│  ├─ get_performance.py
 │  ├─ inference.py
 │  ├─ model_training.py
 │  ├─ predictions.json
@@ -74,11 +88,14 @@ Welcome to the Sentiment Analysis App AKA the SentAnalyzer! This project leverag
       │  ├─ __init__.cpython-312.pyc
       │  ├─ test_data_extraction.cpython-312-pytest-8.3.5.pyc
       │  ├─ test_data_extraction.cpython-312.pyc
-      │  └─ test_data_processing.cpython-312-pytest-8.3.5.pyc
+      │  ├─ test_data_processing.cpython-312-pytest-8.3.5.pyc
+      │  ├─ test_inference.cpython-312-pytest-8.3.5.pyc
+      │  └─ test_model_training.cpython-312-pytest-8.3.5.pyc
       ├─ test_data_extraction.py
       ├─ test_data_processing.py
       ├─ test_inference.py
       └─ test_model_training.py
+
 ```
 
 
