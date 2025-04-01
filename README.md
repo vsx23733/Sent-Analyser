@@ -122,7 +122,7 @@ Gif of the demo:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/vsx23733/Sent-Analyser.git
+   git clone https://github.com/asseromar/Sent-Analysis.git
    cd Sent-Analysis
    ```
 
