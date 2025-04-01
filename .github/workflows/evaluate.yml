@@ -1,0 +1,54 @@
+name: Model Evaluation
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12.7'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt 
+
+    - name: Load model and evaluate
+      run: |
+        python ./src/evaluation.py  
+
+    - name: Store performance metrics as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: evaluation-metrics
+        path: metrics.json
+
+    - name: Fail if performance below threshold
+      run: |
+        performance=$(python ./src/get_performance.py) 
+        if (( $(echo "$performance < 0.59" | bc -l) )); fixed 60% as performance threshold
+          echo "Performance is below threshold" 
+          exit 1
+        fi
+        echo "Performance is above threshold"

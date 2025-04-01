@@ -1,7 +1,8 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
-from transformers import BertTokenizer, BertForSequenceClassification, AdamW
+from transformers import BertTokenizer, BertForSequenceClassification
+from torch.optim import AdamW
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import pandas as pd
@@ -9,12 +10,11 @@ import numpy as np
 from tqdm import tqdm
 import logging
 import os
-from data_processing import *
+from src.data_processing import *
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Set random seed for reproducibility
 SEED = 42
 torch.manual_seed(SEED)
 np.random.seed(SEED)
@@ -86,7 +86,7 @@ def main():
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertForSequenceClassification.from_pretrained(
         'bert-base-uncased',
-        num_labels=3,  # binary class 
+        num_labels=3,  
         output_attentions=False,
         output_hidden_states=False
     )
@@ -94,10 +94,8 @@ def main():
 
 
 
-    # Initialize optimizer
     optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
 
-    # Training loop
     logger.info("Starting training...")
     best_accuracy = 0
     for epoch in range(EPOCHS):
@@ -115,10 +113,9 @@ def main():
         # Save best model
         if val_accuracy > best_accuracy:
             best_accuracy = val_accuracy
-            # Create models directory if it doesn't exist
             if not os.path.exists('models'):
                 os.makedirs('models')
-            torch.save(model.state_dict(), 'models/best_model.pt')
+            torch.save(model.state_dict(), 'models/best_model.pt', _use_new_zipfile_serialization=False)
             logger.info("Saved new best model")
 
     logger.info("Training completed!")

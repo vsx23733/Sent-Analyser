@@ -24,8 +24,8 @@ def test_tokenizer_initialization():
 
 # Test the dataloader preparation
 def test_dataloader():
-    # path_to_data = os.path.join(os.path.dirname(__file__), "../src/reviews.csv")
-    train_loader, val_loader = prepare_dataloader("src/reviews.csv")
+    path_to_data = os.path.join(os.path.dirname(__file__), "../../src/reviews.csv")
+    train_loader, val_loader = prepare_dataloader(path_to_data)
     assert isinstance(train_loader, DataLoader), "Train loader is not a DataLoader"
     assert isinstance(val_loader, DataLoader), "Validation loader is not a DataLoader"
     assert len(train_loader) > 0, "Train loader is empty"
@@ -37,8 +37,15 @@ def test_train_epoch():
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     
     sample_input = tokenizer("This is a test sentence.", padding=True, truncation=True, return_tensors="pt", max_length=128)
-    sample_label = torch.tensor([0]).unsqueeze(0)  # assuming 0 is a valid label
-    batch = {'input_ids': sample_input['input_ids'], 'attention_mask': sample_input['attention_mask'], 'labels': sample_label}
+    sample_label = torch.tensor([0])
+    input_ids = sample_input['input_ids']
+    attention_mask = sample_input['attention_mask']
+
+    batch = {
+        'input_ids': input_ids.squeeze(0),
+        'attention_mask': attention_mask.squeeze(0),
+        'labels': sample_label
+    }
 
     train_loader = DataLoader([batch], batch_size=1)
 
@@ -46,7 +53,7 @@ def test_train_epoch():
     model.to(DEVICE)
     optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5)
 
-    (train_loss, train_accuracy) = train_epoch(model, train_loader, optimizer, DEVICE)
+    train_loss, train_accuracy = train_epoch(model, train_loader, optimizer, DEVICE)
     
     assert isinstance(train_loss, float), f"Expected loss to be a float, got {type(train_loss)}"
     assert isinstance(train_accuracy, float), f"Expected accuracy to be a float, got {type(train_accuracy)}"
@@ -59,8 +66,8 @@ def test_model_saving():
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
     sample_input = tokenizer("This is a test sentence.", padding=True, truncation=True, return_tensors="pt", max_length=128)
-    sample_label = torch.tensor([0]).unsqueeze(0)  # assuming 0 is a valid label
-    batch = {'input_ids': sample_input['input_ids'], 'attention_mask': sample_input['attention_mask'], 'labels': sample_label}
+    sample_label = torch.tensor([1])  
+    batch = {'input_ids': sample_input['input_ids'].squeeze(0), 'attention_mask': sample_input['attention_mask'].squeeze(0), 'labels': sample_label}
 
     train_loader = DataLoader([batch], batch_size=1)
 
@@ -79,8 +86,8 @@ def test_evaluate():
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
     sample_input = tokenizer("This is a test sentence.", padding=True, truncation=True, return_tensors="pt", max_length=128)
-    sample_label = torch.tensor([0]).unsqueeze(0)  # assuming 0 is a valid label
-    batch = {'input_ids': sample_input['input_ids'], 'attention_mask': sample_input['attention_mask'], 'labels': sample_label}
+    sample_label = torch.tensor([1])
+    batch = {'input_ids': sample_input['input_ids'].squeeze(0), 'attention_mask': sample_input['attention_mask'].squeeze(0), 'labels': sample_label}
 
     val_loader = DataLoader([batch], batch_size=1)
 

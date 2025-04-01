@@ -2,12 +2,14 @@ import torch
 import argparse
 from transformers import BertTokenizer, BertForSequenceClassification
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class SentimentPredictor:
-    def __init__(self, model_path='models/best_model.pt', device=None):
+    model_path = os.path.join(os.path.dirname(__file__), '../models/best_model.pt')
+    def __init__(self, model_path=model_path, device=None):
         """
         Initialize the sentiment predictor with a trained model.
         
@@ -37,7 +39,7 @@ class SentimentPredictor:
         
         # Load trained weights
         try:
-            self.model.load_state_dict(torch.load(model_path, map_location=self.device))
+            self.model.load_state_dict(torch.load(model_path, map_location=self.device, weights_only=False))
             logger.info(f"Model loaded successfully from {model_path}")
         except Exception as e:
             logger.error(f"Error loading model from {model_path}: {str(e)}")
@@ -94,8 +96,9 @@ class SentimentPredictor:
 
 def main():
     parser = argparse.ArgumentParser(description='Predict sentiment for input text')
+    model_path = os.path.join(os.path.dirname(__file__), '../models/best_model.pt')
     parser.add_argument('--text', type=str, help='Text to analyze')
-    parser.add_argument('--model_path', type=str, default='models/best_model.pt',
+    parser.add_argument('--model_path', type=str, default=model_path,
                       help='Path to the trained model')
     args = parser.parse_args()
     
