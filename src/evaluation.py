@@ -37,7 +37,7 @@ class SentimentEvaluator:
         )
         
         try:
-            self.model.load_state_dict(torch.load(model_path, map_location=self.device, weights_only=False))
+            self.model = torch.load(model_path, map_location=self.device)
             logger.info(f"Model loaded successfully from {model_path}")
         except Exception as e:
             logger.error(f"Error loading model from {model_path}: {str(e)}")
