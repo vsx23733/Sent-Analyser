@@ -37,7 +37,7 @@ class SentimentEvaluator:
         )
         
         try:
-            self.model.load_state_dict(torch.load(model_path, map_location=self.device))
+            self.model.load_state_dict(torch.load(model_path, map_location=self.device, weights_only=False))
             logger.info(f"Model loaded successfully from {model_path}")
         except Exception as e:
             logger.error(f"Error loading model from {model_path}: {str(e)}")
@@ -181,7 +181,7 @@ def main():
         evaluator = SentimentEvaluator(model_path=model_path)
         results = evaluator.evaluate(test_texts, test_labels)
         
-        save_evaluation_results(results, 'output.json')
+        save_evaluation_results(results, 'metrics.json')
         
     except Exception as e:
         logger.error(f"Error during evaluation: {str(e)}")

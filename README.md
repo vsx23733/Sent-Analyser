@@ -16,7 +16,7 @@ Welcome to the Sentiment Analysis App AKA the SentAnalyzer! This project leverag
     - [Model Architecture](#model-architecture)
     - [Training and Inference Results](#training-and-inference-results)
 9. [👨‍💻 Streamlit Sentiment Analysis App](#-streamlit-sentiment-analysis-app)
-10. [GitHub automation and Containerization with Docker](#github-automation-and-containerization-with-docker)
+10. [GitHub automation and Containerization with Docker](#cicd-workflows-github-actions)
 11. [🙏 Credits](#-credits)
 12. [🌐 License](#-license)
 13. [💡 Future Improvements](#-future-improvements)
