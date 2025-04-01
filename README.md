@@ -122,7 +122,7 @@ Gif of the demo:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/vsx23733/Sent-Analyser.git
+   git clone https://github.com/asseromar/Sent-Analysis.git
    cd Sent-Analysis
    ```
 
@@ -139,7 +139,10 @@ Gif of the demo:
    python -m pip install -r requirements.txt
    ```
 
-4. Run the Streamlit app:
+4. ⚠️ Download the model manually:
+If you want to use our pretrained model, you’ll need to manually download it and place it in the model/ directory, as it is not included when cloning the repository.
+
+5. Run the Streamlit app:
    ```
    streamlit run src/app.py
    ```
